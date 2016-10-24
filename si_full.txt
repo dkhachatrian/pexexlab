@@ -1,47 +1,120 @@
 Breakpoint 1 at 0x542140: file data.c, line 2767.
-A syntax error in expression, near `/i $rip'.
 1: x/i $rip
 <error: No registers.>
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
+No registers.
 Starting program: /w/home.05/be/ugrad/khachatr/CS33/pexexlab/emacs_bin -batch -eval '(print (* 6997 -4398042316799 179))'
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib64/libthread_db.so.1".
-[New Thread 0x7fffe3189700 (LWP 25577)]
+[New Thread 0x7fffe3189700 (LWP 19577)]
 
 Breakpoint 1, Ftimes (nargs=3, args=0x7fffffffd8e0) at data.c:2767
 2767	{
 1: x/i $rip
 => 0x542140 <Ftimes>:	mov    %rsi,%rdx
+Watchpoint 5: $rdx
+
+Old value = 0
+New value = 140737488345312
+Ftimes (nargs=3, args=0x7fffffffd8e0) at data.c:2768
 2768	  return arith_driver (Amult, nargs, args);
 1: x/i $rip
 => 0x542143 <Ftimes+3>:	mov    %rdi,%rsi
-0x0000000000542146	2768	  return arith_driver (Amult, nargs, args);
+Watchpoint 6: $rsi
+
+Old value = 140737488345312
+New value = 3
+0x0000000000542146 in Ftimes (nargs=3, args=0x7fffffffd8e0)
+    at data.c:2768
+2768	  return arith_driver (Amult, nargs, args);
 1: x/i $rip
 => 0x542146 <Ftimes+6>:	mov    $0x2,%edi
-0x000000000054214b	2768	  return arith_driver (Amult, nargs, args);
+Watchpoint 7: $rdi
+
+Old value = 3
+New value = 2
+0x000000000054214b in Ftimes (nargs=3, args=0x7fffffffd8e0)
+    at data.c:2768
+2768	  return arith_driver (Amult, nargs, args);
 1: x/i $rip
 => 0x54214b <Ftimes+11>:	jmpq   0x541d00 <arith_driver>
 arith_driver (code=Amult, nargs=3, args=0x7fffffffd8e0) at data.c:2577
 2577	{
 1: x/i $rip
 => 0x541d00 <arith_driver>:	push   %r15
-0x0000000000541d02	2577	{
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8d8
+New value = (void *) 0x7fffffffd8d0
+0x0000000000541d02 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2577
+2577	{
 1: x/i $rip
 => 0x541d02 <arith_driver+2>:	push   %r14
-0x0000000000541d04	2577	{
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8d0
+New value = (void *) 0x7fffffffd8c8
+0x0000000000541d04 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2577
+2577	{
 1: x/i $rip
 => 0x541d04 <arith_driver+4>:	push   %r13
-0x0000000000541d06	2577	{
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8c8
+New value = (void *) 0x7fffffffd8c0
+0x0000000000541d06 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2577
+2577	{
 1: x/i $rip
 => 0x541d06 <arith_driver+6>:	push   %r12
-0x0000000000541d08	2577	{
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8c0
+New value = (void *) 0x7fffffffd8b8
+0x0000000000541d08 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2577
+2577	{
 1: x/i $rip
 => 0x541d08 <arith_driver+8>:	push   %rbp
-0x0000000000541d09	2577	{
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8b8
+New value = (void *) 0x7fffffffd8b0
+0x0000000000541d09 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2577
+2577	{
 1: x/i $rip
 => 0x541d09 <arith_driver+9>:	push   %rbx
-0x0000000000541d0a	2577	{
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8b0
+New value = (void *) 0x7fffffffd8a8
+0x0000000000541d0a in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2577
+2577	{
 1: x/i $rip
 => 0x541d0a <arith_driver+10>:	sub    $0x28,%rsp
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8a8
+New value = (void *) 0x7fffffffd880
+arith_driver (code=Amult, nargs=3, args=0x7fffffffd8e0) at data.c:2593
 2593	      accum = 1;
 1: x/i $rip
 => 0x541d0e <arith_driver+14>:	movq   $0x1,0x10(%rsp)
@@ -60,25 +133,67 @@ arith_driver (code=Amult, nargs=3, args=0x7fffffffd8e0) at data.c:2577
 0x0000000000541d36	2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d36 <arith_driver+54>:	mov    0x10(%rsp),%rbx
-0x0000000000541d3b	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 3: $rbx
+
+Old value = 140737488345336
+New value = 1
+0x0000000000541d3b in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d3b <arith_driver+59>:	xor    %r11d,%r11d
-0x0000000000541d3e	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 13: $r11
+
+Old value = 140737251821424
+New value = 0
+0x0000000000541d3e in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d3e <arith_driver+62>:	mov    %rdx,%r12
-0x0000000000541d41	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 14: $r12
+
+Old value = 11499856
+New value = 140737488345312
+0x0000000000541d41 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d41 <arith_driver+65>:	mov    %edi,%r14d
-0x0000000000541d44	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 16: $r14
+
+Old value = 140737488345312
+New value = 2
+0x0000000000541d44 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d44 <arith_driver+68>:	xor    %ebp,%ebp
-0x0000000000541d46	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 8: $rbp
+
+Old value = (void *) 0x7fffffffd9c0
+New value = (void *) 0x0
+0x0000000000541d46 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d46 <arith_driver+70>:	mov    %rsi,%rcx
-0x0000000000541d49	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 4: $rcx
+
+Old value = 4611686018595160064
+New value = 3
+0x0000000000541d49 in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d49 <arith_driver+73>:	mov    %r11d,%r13d
-0x0000000000541d4c	2602	  for (argnum = 0; argnum < nargs; argnum++)
+Watchpoint 15: $r13
+
+Old value = 384
+New value = 0
+0x0000000000541d4c in arith_driver (code=Amult, nargs=3, 
+    args=0x7fffffffd8e0) at data.c:2602
+2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d4c <arith_driver+76>:	movq   $0x0,0x18(%rsp)
 0x0000000000541d55	2602	  for (argnum = 0; argnum < nargs; argnum++)
@@ -87,25 +202,61 @@ arith_driver (code=Amult, nargs=3, args=0x7fffffffd8e0) at data.c:2577
 0x0000000000541d58	2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d58 <arith_driver+88>:	add    $0x1,%rbp
+Watchpoint 8: $rbp
+
+Old value = (void *) 0x0
+New value = (void *) 0x1
+arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
+    at data.c:2619
 2619	      switch (code)
 1: x/i $rip
 => 0x541d5c <arith_driver+92>:	mov    %r14d,%esi
+Watchpoint 6: $rsi
+
+Old value = 3
+New value = 2
+arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
+    at data.c:2611
 2611	      val = args[argnum];
 1: x/i $rip
 => 0x541d5f <arith_driver+95>:	mov    -0x8(%r12,%rbp,8),%rdi
-0x0000000000541d64	2611	      val = args[argnum];
+Watchpoint 7: $rdi
+
+Old value = 2
+New value = 27988
+0x0000000000541d64 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2611
+2611	      val = args[argnum];
 1: x/i $rip
 => 0x541d64 <arith_driver+100>:	lea    -0x1(%rbp),%r15
+Watchpoint 17: $r15
+
+Old value = 12223666
+New value = 0
 XTYPE (a=27988) at lisp.h:703
 703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d68 <arith_driver+104>:	mov    %edi,%r8d
-0x0000000000541d6b	703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
+Watchpoint 10: $r8
+
+Old value = 2
+New value = 27988
+0x0000000000541d6b in XTYPE (a=27988) at lisp.h:703
+703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d6b <arith_driver+107>:	mov    %edi,%eax
-0x0000000000541d6d	703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
+Watchpoint 2: $rax
+
+Old value = 16491328
+New value = 27988
+0x0000000000541d6d in XTYPE (a=27988) at lisp.h:703
+703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d6d <arith_driver+109>:	and    $0x7,%r8d
+Watchpoint 10: $r8
+
+Old value = 27988
+New value = 4
 MARKERP (x=27988) at lisp.h:2384
 2384	LISP_MACRO_DEFUN (MARKERP, bool, (Lisp_Object x), (x))
 1: x/i $rip
@@ -119,7 +270,13 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 1: x/i $rip
 => 0x541d7b <arith_driver+123>:	
     mov    0x633316(%rip),%rdx        # 0xb75098
-0x0000000000541d82	2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
+Watchpoint 5: $rdx
+
+Old value = 140737488345312
+New value = 12277634
+0x0000000000541d82 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2612
+2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
 1: x/i $rip
 => 0x541d82 <arith_driver+130>:	test   $0x3,%dil
 0x0000000000541d86	2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
@@ -138,6 +295,10 @@ XINT (a=27988) at lisp.h:701
 701	LISP_MACRO_DEFUN (XINT, EMACS_INT, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541da1 <arith_driver+161>:	sar    $0x2,%rdi
+Watchpoint 7: $rdi
+
+Old value = 27988
+New value = 6997
 arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
     at data.c:2619
 2619	      switch (code)
@@ -167,19 +328,47 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 0x0000000000541e48	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x541e48 <arith_driver+328>:	movabs $0x7fffffffffffffff,%rax
-0x0000000000541e52	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = 27988
+New value = 9223372036854775807
+0x0000000000541e52 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x541e52 <arith_driver+338>:	cqto   
-0x0000000000541e54	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 5: $rdx
+
+Old value = 12277634
+New value = 0
+0x0000000000541e54 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x541e54 <arith_driver+340>:	idiv   %rdi
-0x0000000000541e57	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = 9223372036854775807
+New value = 1318189515057135
+Watchpoint 5: $rdx
+
+Old value = 0
+New value = 2212
+0x0000000000541e57 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x541e57 <arith_driver+343>:	cmp    %rbx,%rax
 0x0000000000541e5a	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x541e5a <arith_driver+346>:	setl   %al
-0x0000000000541e5d	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = 1318189515057135
+New value = 1318189515056896
+0x0000000000541e5d in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x541e5d <arith_driver+349>:	test   %al,%al
 0x0000000000541e5f	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
@@ -188,7 +377,13 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 2645		    accum *= next;
 1: x/i $rip
 => 0x541f40 <arith_driver+576>:	imul   %rdi,%rbx
-0x0000000000541f44	2645		    accum *= next;
+Watchpoint 3: $rbx
+
+Old value = 1
+New value = 6997
+0x0000000000541f44 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2645
+2645		    accum *= next;
 1: x/i $rip
 => 0x541f44 <arith_driver+580>:	jmpq   0x541dd0 <arith_driver+208>
 2602	  for (argnum = 0; argnum < nargs; argnum++)
@@ -218,25 +413,55 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 0x0000000000541d58	2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d58 <arith_driver+88>:	add    $0x1,%rbp
+Watchpoint 8: $rbp
+
+Old value = (void *) 0x1
+New value = (void *) 0x2
+arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
+    at data.c:2619
 2619	      switch (code)
 1: x/i $rip
 => 0x541d5c <arith_driver+92>:	mov    %r14d,%esi
 2611	      val = args[argnum];
 1: x/i $rip
 => 0x541d5f <arith_driver+95>:	mov    -0x8(%r12,%rbp,8),%rdi
-0x0000000000541d64	2611	      val = args[argnum];
+Watchpoint 7: $rdi
+
+Old value = 6997
+New value = -17592169267196
+0x0000000000541d64 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2611
+2611	      val = args[argnum];
 1: x/i $rip
 => 0x541d64 <arith_driver+100>:	lea    -0x1(%rbp),%r15
+Watchpoint 17: $r15
+
+Old value = 0
+New value = 1
 XTYPE (a=-17592169267196) at lisp.h:703
 703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d68 <arith_driver+104>:	mov    %edi,%r8d
-0x0000000000541d6b	703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
+Watchpoint 10: $r8
+
+Old value = 4
+New value = 16777220
+0x0000000000541d6b in XTYPE (a=-17592169267196) at lisp.h:703
+703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d6b <arith_driver+107>:	mov    %edi,%eax
-0x0000000000541d6d	703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
+Watchpoint 2: $rax
+
+Old value = 1318189515056896
+New value = 16777220
+0x0000000000541d6d in XTYPE (a=-17592169267196) at lisp.h:703
+703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d6d <arith_driver+109>:	and    $0x7,%r8d
+Watchpoint 10: $r8
+
+Old value = 16777220
+New value = 4
 MARKERP (x=-17592169267196) at lisp.h:2384
 2384	LISP_MACRO_DEFUN (MARKERP, bool, (Lisp_Object x), (x))
 1: x/i $rip
@@ -250,7 +475,13 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 1: x/i $rip
 => 0x541d7b <arith_driver+123>:	
     mov    0x633316(%rip),%rdx        # 0xb75098
-0x0000000000541d82	2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
+Watchpoint 5: $rdx
+
+Old value = 2212
+New value = 12277634
+0x0000000000541d82 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2612
+2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
 1: x/i $rip
 => 0x541d82 <arith_driver+130>:	test   $0x3,%dil
 0x0000000000541d86	2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
@@ -269,6 +500,10 @@ XINT (a=-17592169267196) at lisp.h:701
 701	LISP_MACRO_DEFUN (XINT, EMACS_INT, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541da1 <arith_driver+161>:	sar    $0x2,%rdi
+Watchpoint 7: $rdi
+
+Old value = -17592169267196
+New value = -4398042316799
 arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
     at data.c:2619
 2619	      switch (code)
@@ -301,19 +536,47 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 0x000000000054203f	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x54203f <arith_driver+831>:	movabs $0x8000000000000000,%rax
-0x0000000000542049	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = 16777220
+New value = -9223372036854775808
+0x0000000000542049 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x542049 <arith_driver+841>:	cqto   
-0x000000000054204b	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 5: $rdx
+
+Old value = 12277634
+New value = -1
+0x000000000054204b in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x54204b <arith_driver+843>:	idiv   %rdi
-0x000000000054204e	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = -9223372036854775808
+New value = 2097154
+Watchpoint 5: $rdx
+
+Old value = -1
+New value = -10485762
+0x000000000054204e in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x54204e <arith_driver+846>:	cmp    %rbx,%rax
 0x0000000000542051	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x542051 <arith_driver+849>:	setl   %al
-0x0000000000542054	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = 2097154
+New value = 2097152
+0x0000000000542054 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x542054 <arith_driver+852>:	jmpq   0x541e5d <arith_driver+349>
 0x0000000000541e5d	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
@@ -325,7 +588,13 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 2645		    accum *= next;
 1: x/i $rip
 => 0x541f40 <arith_driver+576>:	imul   %rdi,%rbx
-0x0000000000541f44	2645		    accum *= next;
+Watchpoint 3: $rbx
+
+Old value = 6997
+New value = -30773102090642603
+0x0000000000541f44 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2645
+2645		    accum *= next;
 1: x/i $rip
 => 0x541f44 <arith_driver+580>:	jmpq   0x541dd0 <arith_driver+208>
 2602	  for (argnum = 0; argnum < nargs; argnum++)
@@ -355,25 +624,55 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 0x0000000000541d58	2602	  for (argnum = 0; argnum < nargs; argnum++)
 1: x/i $rip
 => 0x541d58 <arith_driver+88>:	add    $0x1,%rbp
+Watchpoint 8: $rbp
+
+Old value = (void *) 0x2
+New value = (void *) 0x3
+arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
+    at data.c:2619
 2619	      switch (code)
 1: x/i $rip
 => 0x541d5c <arith_driver+92>:	mov    %r14d,%esi
 2611	      val = args[argnum];
 1: x/i $rip
 => 0x541d5f <arith_driver+95>:	mov    -0x8(%r12,%rbp,8),%rdi
-0x0000000000541d64	2611	      val = args[argnum];
+Watchpoint 7: $rdi
+
+Old value = -4398042316799
+New value = 716
+0x0000000000541d64 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2611
+2611	      val = args[argnum];
 1: x/i $rip
 => 0x541d64 <arith_driver+100>:	lea    -0x1(%rbp),%r15
+Watchpoint 17: $r15
+
+Old value = 1
+New value = 2
 XTYPE (a=716) at lisp.h:703
 703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d68 <arith_driver+104>:	mov    %edi,%r8d
-0x0000000000541d6b	703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
+Watchpoint 10: $r8
+
+Old value = 4
+New value = 716
+0x0000000000541d6b in XTYPE (a=716) at lisp.h:703
+703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d6b <arith_driver+107>:	mov    %edi,%eax
-0x0000000000541d6d	703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
+Watchpoint 2: $rax
+
+Old value = 2097152
+New value = 716
+0x0000000000541d6d in XTYPE (a=716) at lisp.h:703
+703	LISP_MACRO_DEFUN (XTYPE, enum Lisp_Type, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541d6d <arith_driver+109>:	and    $0x7,%r8d
+Watchpoint 10: $r8
+
+Old value = 716
+New value = 4
 MARKERP (x=716) at lisp.h:2384
 2384	LISP_MACRO_DEFUN (MARKERP, bool, (Lisp_Object x), (x))
 1: x/i $rip
@@ -387,7 +686,13 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 1: x/i $rip
 => 0x541d7b <arith_driver+123>:	
     mov    0x633316(%rip),%rdx        # 0xb75098
-0x0000000000541d82	2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
+Watchpoint 5: $rdx
+
+Old value = -10485762
+New value = 12277634
+0x0000000000541d82 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2612
+2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
 1: x/i $rip
 => 0x541d82 <arith_driver+130>:	test   $0x3,%dil
 0x0000000000541d86	2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
@@ -406,6 +711,10 @@ XINT (a=716) at lisp.h:701
 701	LISP_MACRO_DEFUN (XINT, EMACS_INT, (Lisp_Object a), (a))
 1: x/i $rip
 => 0x541da1 <arith_driver+161>:	sar    $0x2,%rdi
+Watchpoint 7: $rdi
+
+Old value = 716
+New value = 179
 arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
     at data.c:2619
 2619	      switch (code)
@@ -435,19 +744,47 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x542098 <arith_driver+920>:	movabs $0x8000000000000000,%rax
-0x00000000005420a2	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = 716
+New value = -9223372036854775808
+0x00000000005420a2 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x5420a2 <arith_driver+930>:	cqto   
-0x00000000005420a4	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 5: $rdx
+
+Old value = 12277634
+New value = -1
+0x00000000005420a4 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x5420a4 <arith_driver+932>:	idiv   %rdi
-0x00000000005420a7	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = -9223372036854775808
+New value = -51527218082987574
+Watchpoint 5: $rdx
+
+Old value = -1
+New value = -62
+0x00000000005420a7 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x5420a7 <arith_driver+935>:	cmp    %rbx,%rax
 0x00000000005420aa	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x5420aa <arith_driver+938>:	setg   %al
-0x00000000005420ad	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+Watchpoint 2: $rax
+
+Old value = -51527218082987574
+New value = -51527218082987776
+0x00000000005420ad in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2638
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
 1: x/i $rip
 => 0x5420ad <arith_driver+941>:	jmpq   0x541e5d <arith_driver+349>
 0x0000000000541e5d	2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
@@ -459,7 +796,13 @@ arith_driver (code=Amult, nargs=<optimized out>, args=0x7fffffffd8e0)
 2645		    accum *= next;
 1: x/i $rip
 => 0x541f40 <arith_driver+576>:	imul   %rdi,%rbx
-0x0000000000541f44	2645		    accum *= next;
+Watchpoint 3: $rbx
+
+Old value = -30773102090642603
+New value = -5508385274225025937
+0x0000000000541f44 in arith_driver (code=Amult, 
+    nargs=<optimized out>, args=0x7fffffffd8e0) at data.c:2645
+2645		    accum *= next;
 1: x/i $rip
 => 0x541f44 <arith_driver+580>:	jmpq   0x541dd0 <arith_driver+208>
 2602	  for (argnum = 0; argnum < nargs; argnum++)
@@ -475,32 +818,106 @@ make_number (n=-5508385274225025937) at lisp.h:700
 700	LISP_MACRO_DEFUN (make_number, Lisp_Object, (EMACS_INT n), (n))
 1: x/i $rip
 => 0x541efa <arith_driver+506>:	lea    0x0(,%rbx,4),%rax
+Watchpoint 2: $rax
+
+Old value = -51527218082987776
+New value = -3586797023190552132
 arith_driver (code=<optimized out>, nargs=<optimized out>, 
     args=<optimized out>) at data.c:2679
 2679	}
 1: x/i $rip
 => 0x541f02 <arith_driver+514>:	add    $0x28,%rsp
-0x0000000000541f06	2679	}
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd880
+New value = (void *) 0x7fffffffd8a8
+0x0000000000541f06 in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f06 <arith_driver+518>:	pop    %rbx
-0x0000000000541f07	2679	}
+Watchpoint 3: $rbx
+
+Old value = -5508385274225025937
+New value = 140737488345336
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8a8
+New value = (void *) 0x7fffffffd8b0
+0x0000000000541f07 in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f07 <arith_driver+519>:	pop    %rbp
-0x0000000000541f08	2679	}
+Watchpoint 8: $rbp
+
+Old value = (void *) 0x3
+New value = (void *) 0x7fffffffd9c0
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8b0
+New value = (void *) 0x7fffffffd8b8
+0x0000000000541f08 in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f08 <arith_driver+520>:	pop    %r12
-0x0000000000541f0a	2679	}
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8b8
+New value = (void *) 0x7fffffffd8c0
+Watchpoint 14: $r12
+
+Old value = 140737488345312
+New value = 11499856
+0x0000000000541f0a in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f0a <arith_driver+522>:	pop    %r13
-0x0000000000541f0c	2679	}
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8c0
+New value = (void *) 0x7fffffffd8c8
+Watchpoint 15: $r13
+
+Old value = 0
+New value = 384
+0x0000000000541f0c in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f0c <arith_driver+524>:	pop    %r14
-0x0000000000541f0e	2679	}
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8c8
+New value = (void *) 0x7fffffffd8d0
+Watchpoint 16: $r14
+
+Old value = 2
+New value = 140737488345312
+0x0000000000541f0e in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f0e <arith_driver+526>:	pop    %r15
-0x0000000000541f10	2679	}
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8d0
+New value = (void *) 0x7fffffffd8d8
+Watchpoint 17: $r15
+
+Old value = 2
+New value = 12223666
+0x0000000000541f10 in arith_driver (code=<optimized out>, 
+    nargs=<optimized out>, args=<optimized out>) at data.c:2679
+2679	}
 1: x/i $rip
 => 0x541f10 <arith_driver+528>:	retq   
+Watchpoint 9: $rsp
+
+Old value = (void *) 0x7fffffffd8d8
+New value = (void *) 0x7fffffffd8e0
 eval_sub (form=<optimized out>) at eval.c:2156
 2156		  SAFE_FREE ();
 1: x/i $rip

@@ -1,0 +1,9 @@
+> gdb emacs_bin
+
+set args -batch -eval '(print (* 6997 -4398042316799 179))'
+break Ftimes
+display/i $rip
+run
+si
+
+[...]
