@@ -1,4 +1,4 @@
-args           -batch -eval '(print (* 6997 -4398042316799 179))'
+# args           -batch -eval '(print (* 6997 -4398042316799 179))'
 
 rax            0xfba340
 rbx            0x7fffffffd8f8
