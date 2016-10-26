@@ -1,0 +1,4 @@
+=> 0x541d92 <arith_driver+146>:	cmp    $0x7,%r8d
++si
+0x0000000000541d96	2614	      if (FLOATP (val))
+1: x/i $rip

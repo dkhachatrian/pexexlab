@@ -1,0 +1,183 @@
+0x542143 <Ftimes+3>:2768	mov %rdi,%rsi	rdx=0x7fffffffd8e0 M8[0x7fffffffd8e0]=0x3
+0x542146 <Ftimes+6>:2768	mov 0x2,%edi	rsi=0x3 M4[0x3]=0x2
+0x54214b <Ftimes+11>:2768	jmpq 0x541d00 <arith_driver>	rdi=0x2
+0x541d00 <arith_driver>:2577	push %r15	M2[0xba84b2]=0xba84b2
+0x541d02 <arith_driver+2>:2577	push %r14	rsp=0x7fffffffd8d0 M2[0x7fffffffd8e0]=0x7fffffffd8e0
+0x541d04 <arith_driver+4>:2577	push %r13	rsp=0x7fffffffd8c8 M2[0x180]=0x180
+0x541d06 <arith_driver+6>:2577	push %r12	rsp=0x7fffffffd8c0 M2[0xaf7950]=0xaf7950
+0x541d08 <arith_driver+8>:2577	push %rbp	rsp=0x7fffffffd8b8 M2[0x7fffffffd9c0]=0x7fffffffd9c0
+0x541d09 <arith_driver+9>:2577	push %rbx	rsp=0x7fffffffd8b0 M2[0x7fffffffd8f8]=0x7fffffffd8f8
+0x541d0a <arith_driver+10>:2577	sub 0x28,%rsp	rsp=0x7fffffffd8a8 M8[0x7fffffffd8a8]=0x28
+0x541d0e <arith_driver+14>:2593	movq 0x1,0x10(%rsp)	rsp=0x7fffffffd880
+0x541d17 <arith_driver+23>:2584	cmp 0x2,%edi	
+0x541d1a <arith_driver+26>:None	je 0x541d2d <arith_driver+45>	
+0x541d2d <arith_driver+45>:2602	test %rsi,%rsi	
+0x541d30 <arith_driver+48>:None	jle 0x5420cc <arith_driver+972>	
+0x541d36 <arith_driver+54>:None	mov 0x10(%rsp),%rbx	
+0x541d3b <arith_driver+59>:2602	xor %r11d,%r11d	rbx=0x1 M4[0x7ffff1e6c770]=0x7ffff1e6c770
+0x541d3e <arith_driver+62>:2602	mov %rdx,%r12	r11=0x0 M8[0xaf7950]=0x7fffffffd8e0
+0x541d41 <arith_driver+65>:2602	mov %edi,%r14d	r12=0x7fffffffd8e0 M4[0x7fffffffd8e0]=0x2
+0x541d44 <arith_driver+68>:2602	xor %ebp,%ebp	r14=0x2 M4[0x7fffffffd9c0]=0x7fffffffd9c0
+0x541d46 <arith_driver+70>:2602	mov %rsi,%rcx	rbp=0x0 M8[0x400000000a000000]=0x3
+0x541d49 <arith_driver+73>:2602	mov %r11d,%r13d	rcx=0x3 M4[0x180]=0x0
+0x541d4c <arith_driver+76>:2602	movq 0x0,0x18(%rsp)	r13=0x0
+0x541d55 <arith_driver+85>:None	nopl (%rax)	
+0x541d58 <arith_driver+88>:None	add 0x1,%rbp	
+0x541d5c <arith_driver+92>:2619	mov %r14d,%esi	rbp=0x1 M4[0x3]=0x2
+0x541d5f <arith_driver+95>:2611	mov -0x8(%r12,%rbp,8),%rdi	rsi=0x2
+0x541d64 <arith_driver+100>:2611	lea -0x1(%rbp),%r15	rdi=0x6d54
+0x541d68 <arith_driver+104>:703	mov %edi,%r8d	r15=0x0 M4[0x2]=0x6d54
+0x541d6b <arith_driver+107>:703	mov %edi,%eax	r8=0x6d54 M4[0xfba340]=0x6d54
+0x541d6d <arith_driver+109>:703	and 0x7,%r8d	rax=0x6d54 M4[0x6d54]=0x7
+0x541d71 <arith_driver+113>:2384	cmp 0x3,%r8d	r8=0x4
+0x541d75 <arith_driver+117>:None	je 0x541f70 <arith_driver+624>	
+0x541d7b <arith_driver+123>:2612	mov 0x633316(%rip),%rdx # 0xb75098	
+0x541d82 <arith_driver+130>:2612	test 0x3,%dil	rdx=0xbb5782
+0x541d86 <arith_driver+134>:None	je 0x541d92 <arith_driver+146>	
+0x541d92 <arith_driver+146>:2614	cmp 0x7,%r8d	
+0x541d96 <arith_driver+150>:None	je 0x541fc8 <arith_driver+712>	
+0x541d9c <arith_driver+156>:2617	mov %rdi,-0x8(%r12,%rbp,8)	
+0x541da1 <arith_driver+161>:701	sar 0x2,%rdi	M8[0x6d54]=0x2
+0x541da5 <arith_driver+165>:2619	cmp 0x8,%r14d	rdi=0x1b55
+0x541da9 <arith_driver+169>:None	ja 0x541dd0 <arith_driver+208>	
+0x541dab <arith_driver+171>:None	jmpq *0x5e9300(,%rsi,8)	
+0x541e30 <arith_driver+304>:2638	test %rdi,%rdi	
+0x541e33 <arith_driver+307>:None	js 0x542030 <arith_driver+816>	
+0x541e39 <arith_driver+313>:None	je 0x541f40 <arith_driver+576>	
+0x541e3f <arith_driver+319>:None	test %rbx,%rbx	
+0x541e42 <arith_driver+322>:None	js 0x542098 <arith_driver+920>	
+0x541e48 <arith_driver+328>:None	movabs 0x7fffffffffffffff,%rax	M8[0x6d54]=0x7fffffffffffffff
+0x541e52 <arith_driver+338>:2638	cqto 	rax=0x7fffffffffffffff
+0x541e54 <arith_driver+340>:2638	idiv %rdi	rdx=0x0
+0x541e57 <arith_driver+343>:2638	cmp %rbx,%rax	rax=0x4aee2e9caa7ef rdx=0x8a4
+0x541e5a <arith_driver+346>:None	setl %al	
+0x541e5d <arith_driver+349>:2638	test %al,%al	rax=0x4aee2e9caa700
+0x541e5f <arith_driver+351>:None	je 0x541f40 <arith_driver+576>	
+0x541f40 <arith_driver+576>:2645	imul %rdi,%rbx	
+0x541f44 <arith_driver+580>:2645	jmpq 0x541dd0 <arith_driver+208>	rbx=0x1b55
+0x541dd0 <arith_driver+208>:2602	lea 0x1(%r15),%rbp	
+0x541dd4 <arith_driver+212>:None	cmp %rbp,%rcx	
+0x541dd7 <arith_driver+215>:None	jle 0x541efa <arith_driver+506>	
+0x541ddd <arith_driver+221>:2604	test %r13b,%r13b	
+0x541de0 <arith_driver+224>:None	je 0x542018 <arith_driver+792>	
+0x542018 <arith_driver+792>:None	mov %rbx,0x10(%rsp)	
+0x54201d <arith_driver+797>:None	mov %rbp,0x18(%rsp)	
+0x542022 <arith_driver+802>:None	jmpq 0x541d58 <arith_driver+88>	
+0x541d58 <arith_driver+88>:None	add 0x1,%rbp	
+0x541d5c <arith_driver+92>:2619	mov %r14d,%esi	rbp=0x2 M4[0x2]=0x2
+0x541d5f <arith_driver+95>:2611	mov -0x8(%r12,%rbp,8),%rdi	
+0x541d64 <arith_driver+100>:2611	lea -0x1(%rbp),%r15	rdi=0x-ffffefffffc
+0x541d68 <arith_driver+104>:703	mov %edi,%r8d	r15=0x1 M4[0x4]=0xfffff00001000004
+0x541d6b <arith_driver+107>:703	mov %edi,%eax	r8=0x1000004 M4[0x4aee2e9caa700]=0xfffff00001000004
+0x541d6d <arith_driver+109>:703	and 0x7,%r8d	rax=0x1000004 M4[0x1000004]=0x7
+0x541d71 <arith_driver+113>:2384	cmp 0x3,%r8d	r8=0x4
+0x541d75 <arith_driver+117>:None	je 0x541f70 <arith_driver+624>	
+0x541d7b <arith_driver+123>:2612	mov 0x633316(%rip),%rdx # 0xb75098	
+0x541d82 <arith_driver+130>:2612	test 0x3,%dil	rdx=0xbb5782
+0x541d86 <arith_driver+134>:None	je 0x541d92 <arith_driver+146>	
+0x541d92 <arith_driver+146>:2614	cmp 0x7,%r8d	
+0x541d96 <arith_driver+150>:None	je 0x541fc8 <arith_driver+712>	
+0x541d9c <arith_driver+156>:2617	mov %rdi,-0x8(%r12,%rbp,8)	
+0x541da1 <arith_driver+161>:701	sar 0x2,%rdi	M8[0x-ffffefffffc]=0x2
+0x541da5 <arith_driver+165>:2619	cmp 0x8,%r14d	rdi=0x-3ffffbfffff
+0x541da9 <arith_driver+169>:None	ja 0x541dd0 <arith_driver+208>	
+0x541dab <arith_driver+171>:None	jmpq *0x5e9300(,%rsi,8)	
+0x541e30 <arith_driver+304>:2638	test %rdi,%rdi	
+0x541e33 <arith_driver+307>:None	js 0x542030 <arith_driver+816>	
+0x542030 <arith_driver+816>:2638	test %rbx,%rbx	
+0x542033 <arith_driver+819>:None	js 0x5420b2 <arith_driver+946>	
+0x542035 <arith_driver+821>:None	cmp 0xffffffffffffffff,%rdi	
+0x542039 <arith_driver+825>:None	je 0x541f40 <arith_driver+576>	
+0x54203f <arith_driver+831>:None	movabs 0x8000000000000000,%rax	M8[0x1000004]=0x8000000000000000
+0x542049 <arith_driver+841>:2638	cqto 	rax=0x-8000000000000000
+0x54204b <arith_driver+843>:2638	idiv %rdi	rdx=0x-1
+0x54204e <arith_driver+846>:2638	cmp %rbx,%rax	rax=0x200002 rdx=0x-a00002
+0x542051 <arith_driver+849>:None	setl %al	
+0x542054 <arith_driver+852>:2638	jmpq 0x541e5d <arith_driver+349>	rax=0x200000
+0x541e5d <arith_driver+349>:None	test %al,%al	
+0x541e5f <arith_driver+351>:None	je 0x541f40 <arith_driver+576>	
+0x541f40 <arith_driver+576>:2645	imul %rdi,%rbx	
+0x541f44 <arith_driver+580>:2645	jmpq 0x541dd0 <arith_driver+208>	rbx=0x-6d53f92abfe4ab
+0x541dd0 <arith_driver+208>:2602	lea 0x1(%r15),%rbp	
+0x541dd4 <arith_driver+212>:None	cmp %rbp,%rcx	
+0x541dd7 <arith_driver+215>:None	jle 0x541efa <arith_driver+506>	
+0x541ddd <arith_driver+221>:2604	test %r13b,%r13b	
+0x541de0 <arith_driver+224>:None	je 0x542018 <arith_driver+792>	
+0x542018 <arith_driver+792>:None	mov %rbx,0x10(%rsp)	
+0x54201d <arith_driver+797>:None	mov %rbp,0x18(%rsp)	
+0x542022 <arith_driver+802>:None	jmpq 0x541d58 <arith_driver+88>	
+0x541d58 <arith_driver+88>:None	add 0x1,%rbp	
+0x541d5c <arith_driver+92>:2619	mov %r14d,%esi	rbp=0x3 M4[0x2]=0x2
+0x541d5f <arith_driver+95>:2611	mov -0x8(%r12,%rbp,8),%rdi	
+0x541d64 <arith_driver+100>:2611	lea -0x1(%rbp),%r15	rdi=0x2cc
+0x541d68 <arith_driver+104>:703	mov %edi,%r8d	r15=0x2 M4[0x4]=0x2cc
+0x541d6b <arith_driver+107>:703	mov %edi,%eax	r8=0x2cc M4[0x200000]=0x2cc
+0x541d6d <arith_driver+109>:703	and 0x7,%r8d	rax=0x2cc M4[0x2cc]=0x7
+0x541d71 <arith_driver+113>:2384	cmp 0x3,%r8d	r8=0x4
+0x541d75 <arith_driver+117>:None	je 0x541f70 <arith_driver+624>	
+0x541d7b <arith_driver+123>:2612	mov 0x633316(%rip),%rdx # 0xb75098	
+0x541d82 <arith_driver+130>:2612	test 0x3,%dil	rdx=0xbb5782
+0x541d86 <arith_driver+134>:None	je 0x541d92 <arith_driver+146>	
+0x541d92 <arith_driver+146>:2614	cmp 0x7,%r8d	
+0x541d96 <arith_driver+150>:None	je 0x541fc8 <arith_driver+712>	
+0x541d9c <arith_driver+156>:2617	mov %rdi,-0x8(%r12,%rbp,8)	
+0x541da1 <arith_driver+161>:701	sar 0x2,%rdi	M8[0x2cc]=0x2
+0x541da5 <arith_driver+165>:2619	cmp 0x8,%r14d	rdi=0xb3
+0x541da9 <arith_driver+169>:None	ja 0x541dd0 <arith_driver+208>	
+0x541dab <arith_driver+171>:None	jmpq *0x5e9300(,%rsi,8)	
+0x541e30 <arith_driver+304>:2638	test %rdi,%rdi	
+0x541e33 <arith_driver+307>:None	js 0x542030 <arith_driver+816>	
+0x541e39 <arith_driver+313>:None	je 0x541f40 <arith_driver+576>	
+0x541e3f <arith_driver+319>:None	test %rbx,%rbx	
+0x541e42 <arith_driver+322>:None	js 0x542098 <arith_driver+920>	
+0x542098 <arith_driver+920>:2638	movabs 0x8000000000000000,%rax	M8[0x2cc]=0x8000000000000000
+0x5420a2 <arith_driver+930>:2638	cqto 	rax=0x-8000000000000000
+0x5420a4 <arith_driver+932>:2638	idiv %rdi	rdx=0x-1
+0x5420a7 <arith_driver+935>:2638	cmp %rbx,%rax	rax=0x-b70fbb5a19be36 rdx=0x-3e
+0x5420aa <arith_driver+938>:None	setg %al	
+0x5420ad <arith_driver+941>:2638	jmpq 0x541e5d <arith_driver+349>	rax=0x-b70fbb5a19bf00
+0x541e5d <arith_driver+349>:None	test %al,%al	
+0x541e5f <arith_driver+351>:None	je 0x541f40 <arith_driver+576>	
+0x541f40 <arith_driver+576>:2645	imul %rdi,%rbx	
+0x541f44 <arith_driver+580>:2645	jmpq 0x541dd0 <arith_driver+208>	rbx=0x-4c71b738e42ce391
+0x541dd0 <arith_driver+208>:2602	lea 0x1(%r15),%rbp	
+0x541dd4 <arith_driver+212>:None	cmp %rbp,%rcx	
+0x541dd7 <arith_driver+215>:None	jle 0x541efa <arith_driver+506>	
+0x541efa <arith_driver+506>:700	lea 0x0(,%rbx,4),%rax	
+0x541f02 <arith_driver+514>:2679	add 0x28,%rsp	rax=0x-31c6dce390b38e44
+0x541f06 <arith_driver+518>:2679	pop %rbx	rsp=0x7fffffffd8a8
+0x541f07 <arith_driver+519>:2679	pop %rbp	rbx=0x7fffffffd8f8 rsp=0x7fffffffd8b0
+0x541f08 <arith_driver+520>:2679	pop %r12	rbp=0x7fffffffd9c0 rsp=0x7fffffffd8b8
+0x541f0a <arith_driver+522>:2679	pop %r13	r12=0xaf7950 rsp=0x7fffffffd8c0
+0x541f0c <arith_driver+524>:2679	pop %r14	r13=0x180 rsp=0x7fffffffd8c8
+0x541f0e <arith_driver+526>:2679	pop %r15	r14=0x7fffffffd8e0 rsp=0x7fffffffd8d0
+0x541f10 <arith_driver+528>:2679	retq 	r15=0xba84b2 rsp=0x7fffffffd8d8
+0x555429 <eval_sub+1641>:2156	cmpb 0x0,-0x88(%rbp)	rsp=0x7fffffffd8e0
+0x555430 <eval_sub+1648>:2154	mov %rax,%rbx	M8[0x7fffffffd8f8]=0xce39231c6f4c71bc
+0x555433 <eval_sub+1651>:2156	je 0x555081 <eval_sub+705>	rbx=0x-31c6dce390b38e44
+0x555081 <eval_sub+705>:2263	mov 0x620200(%rip),%rax # 0xb75288	
+0x555088 <eval_sub+712>:2262	subq 0x1,0x620250(%rip) # 0xb752e0	rax=0xfba1c0
+0x555090 <eval_sub+720>:2263	testb 0x1,0x1(%rax,%r13,1)	
+0x555096 <eval_sub+726>:None	jne 0x555178 <eval_sub+952>	
+0x55509c <eval_sub+732>:2265	subq 0x20,0x620264(%rip) # 0xb75308	
+0x5550a4 <eval_sub+740>:2267	jmpq 0x554dea <eval_sub+42>	
+0x554dea <eval_sub+42>:2268	lea -0x28(%rbp),%rsp	
+0x554dee <eval_sub+46>:2268	mov %rbx,%rax	rsp=0x7fffffffd998 M8[0xfba1c0]=0xce39231c6f4c71bc
+0x554df1 <eval_sub+49>:2268	pop %rbx	rax=0x-31c6dce390b38e44
+0x554df2 <eval_sub+50>:2268	pop %r12	rbx=0x7fffffffda08 rsp=0x7fffffffd9a0
+0x554df4 <eval_sub+52>:2268	pop %r13	r12=0xafb8e0 rsp=0x7fffffffd9a8
+0x554df6 <eval_sub+54>:2268	pop %r14	r13=0xb rsp=0x7fffffffd9b0
+0x554df8 <eval_sub+56>:2268	pop %r15	r14=0x2 rsp=0x7fffffffd9b8
+0x554dfa <eval_sub+58>:2268	pop %rbp	r15=0xfdf186 rsp=0x7fffffffd9c0
+0x554dfb <eval_sub+59>:2268	retq 	rbp=0x7fffffffda70 rsp=0x7fffffffd9c8
+0x555124 <eval_sub+868>:2165	mov %r15,%rdi	rsp=0x7fffffffd9d0 M8[0xb3]=0xfdf186
+0x555127 <eval_sub+871>:2167	mov %rax,-0x8(%rbx)	rdi=0xfdf186
+0x55512b <eval_sub+875>:2165	callq 0x540a30 <Fcdr>	
+0x540a30 <Fcdr>:703	mov %edi,%eax	rsp=0x7fffffffd9c8 M4[0x-31c6dce390b38e44]=0xfdf186
+0x540a32 <Fcdr+2>:703	and 0x7,%eax	rax=0xfdf186 M4[0xfdf186]=0x7
+0x540a35 <Fcdr+5>:1084	cmp 0x6,%eax	rax=0x6
+0x540a38 <Fcdr+8>:None	je 0x540a50 <Fcdr+32>	
+0x540a50 <Fcdr+32>:1055	mov 0x2(%rdi),%rax	
+0x540a54 <Fcdr+36>:584	retq 	rax=0xba84b2
+0x555130 <eval_sub+880>:2165	mov %rax,%r15	rsp=0x7fffffffd9d0 M8[0xfdf186]=0xba84b2
+0x555133 <eval_sub+883>:2165	cmp -0x88(%rbp),%rbx	r15=0xba84b2
