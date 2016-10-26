@@ -18,7 +18,7 @@ mem_dict = {} #when things get pushed into memory, hold values here until overwr
 cur_file = ''
 cur_line_no = ''
 asm_loc_info = ''
-asm_instr = []
+asm_instr = ['']
 asm_instr_str = ''
 cur_reg2val = {} #to be appended to line of instruction.
 # Updated per-machine instruction, and so temporary
@@ -63,6 +63,8 @@ def parse_dump(dump, outf):
     global cur_file, cur_line_no, asm_loc_info, asm_instr, cur_reg2val, asm_instr_str
 
     i = 0
+    check_jump = ''
+    jmp_loc = 0
 
     for line in dump:
         i += 1 #keep track of line number for reference
@@ -158,11 +160,31 @@ def parse_dump(dump, outf):
 
         # rip updates before things execute
         if line.startswith('=>'): #ASM line
+
+#            if i == 861:
+#                pdb.set_trace()
+#                
             asm_line = line[3:] #cut off =>
             # asm_loc_info, asm_instr = asm_line.split(':')[0], asm_line.split(':')[1]
             # update rip, which is advanced
             # before the ASM instruction is executed
-            reg_dict['rip'] = int(asm_line.split('<')[0].strip(),16)                
+            rip_new = int(asm_line.split('<')[0].strip(),16)                
+            reg_dict['rip'] = rip_new
+            
+            # first check if the previous instruction was a successful jump
+            if check_jump != '':
+                if 'jmp' in check_jump or jmp_loc == rip_new:
+#                jmp_loc = int(asm_instr_str.split()[1], 16)
+#                if jmp_loc == rip_new:
+                    cur_reg2val['rip'] = rip_new #performed jump    
+                    check_jump = ''
+
+
+
+
+            
+
+        
 
 
             #perform updates with updated rip
@@ -171,11 +193,11 @@ def parse_dump(dump, outf):
             # i.e. say what effects on memory this has
             # let's first update our register_dict,
             # and keep track of what they changed
-            for reg in cur_reg2val:
+            for reg in sorted(cur_reg2val.keys()):
 #                reg.strip('$') #match with reg_dict and spec
                 val = cur_reg2val[reg]
                 reg_dict[reg] = val
-                mem_effects.append('{0}={1}'.format(reg, val2tc(val, is_reg=True)))
+                mem_effects.append('{0}={1}'.format(reg, val2tc(val, reg_name = reg)))
             # if any weirder locations changed, put those in mem_dict
             # and save in mem_effects
             mem_effects.extend(update_values(asm_instr))
@@ -197,6 +219,7 @@ def parse_dump(dump, outf):
             # parse rest of line
             
             asm_loc_info, asm_instr_str = asm_line.split(':')
+            asm_instr_str = asm_instr_str.split('#')[0].strip()
 #            re.sub(r' ', r'', asm_loc_info) # remove spaces
             
             asm_loc_info = re.sub(r'\s', '', asm_loc_info) #remove whitespace
@@ -205,7 +228,26 @@ def parse_dump(dump, outf):
             
             asm_instr_str = asm_instr_str.strip()
             # get asm_instr into command and args
+            
             asm_instr = parse_asm_instruction(asm_instr_str)
+            
+            if asm_instr[0].startswith('j'):
+#                if 'jmp' in asm_instr[0]:
+#                    #definitely true
+#                    cur_reg2val['rip'] = reg_dict['rip']
+#                else:
+                check_jump = asm_instr[0]
+                jmp_loc = asm_instr[2]
+            
+#            pai = parse_asm_instruction(asm_instr_str)
+#            
+#            replace_instr = True
+#            for e in pai:
+#                if e == '':
+#                    replace_instr = False
+#                    break
+#            if replace_instr:
+#                asm_instr = pai
 #            continue
 
         if line.startswith('0x'):
@@ -303,32 +345,6 @@ def update_values(asm_instr):
                 else:
                     word_size = 2
 
-    # if 'push' in opcode:
-    #     # %rsp already updated before function call
-    #     try:
-    #         arg0 = reg_dict[arg0]
-    #         mem_dict[reg_dict['%rsp']] = arg0
-    #     except KeyError: #not a register. No need to lookup
-    #         mem_dict[reg_dict['%rsp']] = arg0
-    #     s = 'M{2}[{0:x}]={1:x}'.format(reg_dict['%rsp'], arg0, word_size)
-    #     mem_effects.append(s)
-
-    # if 'mov' in opcode and type(arg1) is int:
-    #     # %rsp already updated before function call
-    #     try:
-    #         arg0 = reg_dict[arg0]
-    #         mem_dict[reg_dict['%rsp']] = arg0
-    #     except KeyError: #not a register. No need to lookup
-    #         mem_dict[reg_dict['%rsp']] = arg0
-    #     s = 'M{2}[{0:x}]={1:x}'.format(reg_dict['%rsp'], arg0, word_size)
-    #     mem_effects.append(s)    
-
-    # if 'lea' in opcode:
-    #     pass
-
-    # opcode arg0, arg1
-    # arg1 must *not* be a register (ie must be an int)
-    # arg0 may be a register *or* an address that should be followed
 
 
     try:
@@ -438,7 +454,7 @@ def update_values(asm_instr):
 # but they shouldn't cause errors in val2tc
 VAL_MAX = 2**64 - 1 
                     
-def val2tc(x, is_reg = False):
+def val2tc(x, reg_name = ''):
     ''' Converts integer into C-style 2's complement representation.
     Padded to nearest multiple of 8 if negative.
     If is_reg, padded to full 64 bits.
@@ -476,8 +492,9 @@ def val2tc(x, is_reg = False):
     xb = ('{0:b}'.format(x)).strip('-') #remove negative sign
     mask = ''
     
-    if is_reg:
-        mask = 64*'1'
+    if reg_name != '':
+        if reg_name != 'rip':
+            mask = 64*'1'
     else:
         for i in [8,16,32,64]:
             if i >= len(xb):
@@ -628,6 +645,8 @@ def parse_asm_instruction(asm_line):
     asm_line = re.sub(r' +', r' ', asm_line)
     asm_line = re.sub(r'\*', r'', asm_line)
 
+    asm_line = asm_line.split('<')[0].strip() #remove misc. function info
+
     try:
         opcode, arg_s = asm_line.split(' ')
     except ValueError: #too many for splitting to work
@@ -645,9 +664,13 @@ def parse_asm_instruction(asm_line):
     # otherwise, can split off and know the last arg is the last
     # element in list
     else:
-        sp_c = [re.sub(r'%', r'', s) for s in arg_s.split(',')]
-        arg1 = sp_c.pop()
-        arg0 = ','.join(sp_c)
+        if sp_s[0][-1] == ')':
+            arg0 = sp_s[0]
+            arg1 = ''
+        else:
+            sp_c = [re.sub(r'%', r'', s) for s in arg_s.split(',')]
+            arg1 = sp_c.pop()
+            arg0 = ','.join(sp_c)
     
     
 #    if ',(' in arg_s: #then second arg is memory addressing mode
