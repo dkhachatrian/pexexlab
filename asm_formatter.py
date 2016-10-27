@@ -69,7 +69,7 @@ def parse_dump(dump, outf):
     for line in dump:
         i += 1 #keep track of line number for reference
         
-#        if i == 416:
+#        if i == 420:
 #            pdb.set_trace()
 #        
         line = line.strip('\n')
@@ -220,6 +220,7 @@ def parse_dump(dump, outf):
             
             asm_loc_info, asm_instr_str = asm_line.split(':')
             asm_instr_str = asm_instr_str.split('#')[0].strip()
+            asm_instr_str = asm_instr_str.split('<')[0].strip()
 #            re.sub(r' ', r'', asm_loc_info) # remove spaces
             
             asm_loc_info = re.sub(r'\s', '', asm_loc_info) #remove whitespace
@@ -268,7 +269,7 @@ def parse_dump(dump, outf):
                 pass
 
 
-cmds_covered = ['mov', 'lea']
+cmds_covered = ['mov', 'lea', 'add', 'sub']
 
 char_to_size = {'q': 8, 'l': 4, 'b': 1}
 
@@ -351,33 +352,30 @@ def update_values(asm_instr):
         arg0 = reg_aliases[arg0]
         arg0 = reg_dict[arg0]
     except KeyError:
-        pass
+        if 'lea' not in opcode:
+        # look up value for arg0 if it's a value in mem_dict or reg_dict
+            try:
+                arg0 = mem_dict[arg0]
+            except KeyError:
+                pass
     
     try:
         arg1 = reg_aliases[arg1]
         arg1 = reg_dict[arg1]
     except KeyError:
         pass
-
-    if 'lea' not in opcode:
-    # look up value for arg0 if it's a value in mem_dict or reg_dict
-        try:
-            arg0 = mem_dict[arg0]
-        except KeyError:
-            pass
-#        #but maybe it's a register?
+        # don't look up in mem_dict if they're already values
+        # because the printout would make it look like the address
+        # is derferenced twice (with M8[0x1]...)
 #        try:
-#            arg0 = reg_dict[arg0]
+#            arg1 = mem_dict[arg1]
 #        except KeyError:
 #            pass
-#        # then it's just some number as far as we care
-#
+
+
 
     
-    try:
-        arg1 = mem_dict[arg1]
-    except KeyError:
-        pass
+
 #    #but maybe it's a register?
 #    try:
 #        arg1 = reg_dict[arg1]
@@ -412,6 +410,7 @@ def update_values(asm_instr):
     if opcode.startswith('mov') or 'lea' in opcode or 'push' in opcode:
         mem_dict[arg1] = arg0
 
+
     # convert args to int if we can
     if type(arg0) is str:
         try:
@@ -434,6 +433,16 @@ def update_values(asm_instr):
 #        pass
     
 #    f_str = ''
+
+
+    if 'add' in opcode or 'sub' in opcode:
+        if type(arg1) is str:
+            return mem_effects #already covered if dealing with registers
+        if 'add' in opcode and type(arg1) is int:
+            mem_dict[arg1] += arg0
+        elif 'sub' in opcode and type(arg1) is int:
+            mem_dict[arg1] -= arg0
+
 
     # TODO: make hex values valid, i.e., make them 2's complement
     eff = 'M{0}[0x{1:x}]={2}'.format(word_size, arg1, val2tc(arg0))
