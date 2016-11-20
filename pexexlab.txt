@@ -1,0 +1,62 @@
+# So if I were going about this manually,
+# I'd have done something to the effect of the following:
+# get to function of interest
+#
+break Ftimes
+#
+# now we'll end up stepping through every instruction
+# noting which registers and memory addresses change
+# not exactly easy to set watches for every location in memory
+# but much easier to set them for commonly used registers
+# (rax, rbx, rdi, rsi, ...) and to perform 'info registers'
+# when a funkier machine instruction is headed our way
+#
+# but definitely set up a display for $rip so you don't
+# have to disassemble to re-find the machine line
+#
+watch/i $rip
+watch/x $rax
+watch/x $rdi
+watch/x $rsi
+# ... until it's been set for all regular-use registers
+#
+# at this point, it's the laborious process of
+# stepping through each machine instruction
+si
+# then seeing what changed
+# if a register changed, a watch notification would pop up
+# and it'd be fairly simple to
+info registers
+# then copy-paste the new info into a trace file
+# for locations stored into memory, it'd be more tricky
+# You'd have to calculate the address by hand and get a value,
+# say mem_addr. Then you'd
+inspect/x mem_addr
+# to see what the value changed to
+#
+# For jumps, you'd note the memory address it wants to jump to,
+# and if the next si brings you to that address, you note it
+#
+# Determining the size of the loading/moving/etc is done by
+# looking at either the opcode (if it ends in q->9, l->4, b->1, ...)
+# or by looking at the names of the registers (r__->8, e__->4, ...)
+#
+#
+# So you'd do this for literally 100+ lines of machine code
+# and your mind would numb from the tedium.
+# I see the merit of using the annotated machine-code instructions
+# to understand how the function actually works
+# but performing the annotation by hand is a fool's errand.
+# So the fool avoided the fool's errand by making a Python script
+# (sadly a lot of spaghetti code, as it was created under the
+# belief that the assignment deadline would not be extended)
+# to perform this for me, given a dump of GDB's input and output
+# when having set up watches on all registers and si'd from the
+# breakpoint at Ftimes until it returns to eval_sub.
+# trace.tr comes from this Python code, which you could see in
+# all its Flying Spaghetti Monster-like glory at
+# github.com/dkhachatrian/***
+#
+# Now then, I'll return back to the rest of the assignment
+# and using the script's output to appreciate (in a less annoying manner)
+# how Ftimes works.
