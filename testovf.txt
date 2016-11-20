@@ -1,0 +1,26 @@
+-O2 (returns 0)
+```````````````
+The compiler optimizes the code such that the function will always return 0.
+It likely sees the variable 'big' on both sides, and so optimizes those away.
+Then it's comparing LONG_MAX (a constant) to zero (another constant).
+It knows that LONG_MAX cannot ever be less than zero, so it optimizes the whole thing to simply xor'ing the result register to always return 0.
+
+
+-O2 -fsanitize=undefined (looks for shared object files I don't have in the Linux server...)
+`````````````````````````````````
+This time around, the compiler is playing detective, trying to see if overflow occurs when adding LONG_MAX (in %rdx) and big (in %rbp) (storing the result in %rbp), as is evidenced by "jo	.L6".
+This block of instructions pushes 'big' (also in %rbx) into %rsi and something called $.Lubsan_data0 into %rdi. From what I can gather, $.Lubsan_data0 provides metadata about the 'big' variable. With these two variables in the argument registers, __ubsan_handle_add_overflow is called to (I'd imagine) handle overflow by addition in some manner.
+After "handling overflow", the result is set to 1 if (rbx - rbp) > 0 and 0 if not. rbx contains big, and rbp contains the overflowed sum (which should not have been touched by the called to __ubsan_handle_add_overflow). So I'd imagine the optimization makes the compiler realize that the way to handle the potential for overflow is to turn (big + LONG_MAX < big) into (0 < big - (big + LONG_MAX)).
+Conveniently, big === LONG_MAX and LONG_MAX + LONG_MAX === LONG_MIN, and LONG_MAX - LONG_MIN === -1, and (0 < -1) is not true, so the program would return 0, which is in fact the correct answer.
+
+-O2 -fwrapv (returns 1)
+```````````````````````
+This set of instructions actually performs an addition of the two numbers 'big' and LONG_MAX
+(with the value of big apparently being stored in the place in memory whose address
+corresponds to big(%rip), if the "movq	big(%rip), %rdx" line is any indication).
+It does note that it's adding LONG_MAX and comparing the result to LONG_MAX, so it does not
+load in LONG_MAX again before performing the comparison.
+The addition overflows exactly as the -fwrapv parameter would make it.
+The cmp instruction is "cmpq   %rax, %rdx", where rax = big + LONG_MAX and rdx = big, which the compiler happens to know is equal to LONG_MAX, the other side of the '<' comparison operator.
+The setl then sees if (rdx-rax) < 0. Since rax overflowed to a negative value, (rdx-rax) overflows to a negative value, which the compiler sees as less than zero.
+So the compiler returns 1, saying that LONG_MAX + big < LONG_MAX is true. (It tried.)

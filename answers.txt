@@ -1,0 +1,56 @@
+// Answer the following questions, in a plain text file answers.txt:
+====================================================================
+// Explain why the instructions in the trace did not produce the correct mathematical result. Which instructions caused the problem, exactly?
+
+Two bits are reserved for markers for checking 'coercion' of a number or float (if data.c:2612 is any indication). These two bits are kept as the least significant bits of the number.
+To do this, the program multiplies the number by 4 via an lea (see instruction at e.g. 0x541efa<arith_driver+506>data.c:2679), and whenever it will actually perform an operation with the number (like multiply, print to screen, etc.) it performs an arithmetic right shift by 2 (see instruction at 0x541da1<arith_driver+161>data.c:2619).
+
+The arithmetically correct answer, the answer given by Emacs to (* 6997 -4398042316799 179), and the number returned by arith_driver are:
+
+-5508385274225025937 = 0x838e48c71bd31c6f <-- artihmetically correct (ac)
+-896699255797638033  = 0xf38e48c71bd31c6f <-- given by Emacs (er)
+‭-3586797023190552132‬ = 0x‭ce39231c6f4c71bc <-- returned by arith_driver (ad)
+
+When displaying the answer, it arithmetically right-shifts the result of arith_driver by 2.
+(ad) >> 2 === (er)
+
+This shifts in 1's and ends up making the top nibble 1111 instead of 1000, as it would be if it were correct. (This is why the most positive possible result is 0x1ff..ff; shifting this bit pattern to the left and right by 2 results in the same number, as no 1's are put in the bit pattern as a result of arithmetic shifting.)
+
+
+// Explain why the shell command emacs -batch -eval '(print most-positive-fixnum)' outputs 2305843009213693951. Where did the number 2305843009213693951 come from? Explain in terms of the Emacs source code.
+
+2305843009213693951 = 0x1fffffffffffffff, i.e., the most significant nibble is 0001 and the rest are 1111.
+Emacs seems to use two bits for different flags, and store the arguments with these flags in place. The machine ANDs the values loaded from the args array with 0x7 and compares the values to 0x3 (for positive numbers) and 0x7 (for negative values) to see whether to jump to different instructions. This corresponds to data.c:2612, with a call to the aptly named function CHECK_NUMBER_OR_FLOAT_COERCE_MARKER(val) likely having been 'inlined' in the assembly instructions.
+Since these markers take up the two middle bits of the most significant nibble, those cannot be used to represent positive numbers, and since the most significant bit is the sign bit, that leaves 0x1ff..ff as the maximum value.
+
+
+// Explain why the shell command emacs -batch -eval '(print (* most-positive-fixnum most-positive-fixnum))' outputs only 1.
+
+When multiplicative overflow occurs, the program performs the operation anyway, then ANDs the lower 64 bits of the result with 0x3ff..ff (corresponding to the integer with the most 1's that the program can handle due to using two bits as markers). (Look at the instructions near 0x541e65 <arith_driver+357>.) It then returns that as the result. 
+0x1ff..ff * 0x1ff..ff = 0x3ff..ffc00..01
+0xc00..01 & 0x3ff..ff = 0x00..01
+
+So it ends up returning 1.
+
+
+// The Emacs executable was compiled with GCC's -O2 option. Suppose it had also been compiled with -fsanitize=undefined. Explain any problems the trace would run into, or if there would not be a problem explain why not.
+
+-fsanitize=undefined deploys the undefined_behavior_sanitizer (ubsan) to output runtime errors when encountered by a program during runtime, but usually allows further execution of instructions.
+In the case of muliplicative overflow, Emacs willingly performs the multiplication anyway, before applying a bitmask and returning the result. ubsan would issue a runtime error, but assuming it doesn't decide to halt the program, the trace would continue the same way as it had previously.  
+
+
+// Similarly, discuss whether and how -fwrapv would have caused problems.
+
+Again, the behavior of the program should be the same. The program already has a mechanism in place for multiplicative overflow. Since multiplication cannot overflow past the 128-bit wide joint register in order to alter the bottom 64 bits even when the entire range of 2's complement integers are allowed, there is no reason why application of the bitmask and the subsequent returned value would change.
+Again, these answers are still going to be wrong, but they're at least wrong in a replicable way.
+
+
+// Suppose we assume -fwrapv is used. Suggest changes to how Emacs does integer multiplication that should help improve its performance. Focus on integer multiplication; don't alter the machinery Emacs uses to decide which flavor of multiplication to do.
+
+Instead of checking beforehand to see whether the multiplication would overflow by dividing the next operand by MAX_LONG or MIN_LONG and comparing the result to the current accumulated value (see e.g. <arith_driver+841> to <arith_driver+852> and the corresponding check at <arith_driver+349>), it could just multiply the two numbers together, check for unexpected sign changes to update the overflow flag accordingly, and apply the corresponding bitmask at the end.
+In any case, the division check could likely be made superfluous.
+
+
+// How significant are the efficiency differences discussed above, in the context of Emacs execution?
+
+Integer division can be fairly time-consuming, so it would save a bit of time in that way. But I don't exactly think of Emacs as a go-to for number calculation, and there's a large amount of overhead and other functions visited when attempting to print out an answer to a multiplication problem. In this larger context, the efficiency difference would be pretty small. (But hey, any improvement is still an improvement, right?)

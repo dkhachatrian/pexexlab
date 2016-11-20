@@ -1,0 +1,105 @@
+2575	static Lisp_Object
+2576	arith_driver (enum arithop code, ptrdiff_t nargs, Lisp_Object *args)
+2577	{
+2578	  Lisp_Object val;
+2579	  ptrdiff_t argnum, ok_args;
+2580	  EMACS_INT accum = 0;
+2581	  EMACS_INT next, ok_accum;
+2582	  bool overflow = 0;
+2583	
+2584	  switch (code)
+2585	    {
+2586	    case Alogior:
+2587	    case Alogxor:
+2588	    case Aadd:
+2589	    case Asub:
+2590	      accum = 0;
+2591	      break;
+2592	    case Amult:
+2593	      accum = 1;
+2594	      break;
+2595	    case Alogand:
+2596	      accum = -1;
+2597	      break;
+2598	    default:
+2599	      break;
+2600	    }
+2601	
+2602	  for (argnum = 0; argnum < nargs; argnum++)
+2603	    {
+2604	      if (! overflow)
+2605		{
+2606		  ok_args = argnum;
+2607		  ok_accum = accum;
+2608		}
+2609	
+2610	      /* Using args[argnum] as argument to CHECK_NUMBER_... */
+2611	      val = args[argnum];
+2612	      CHECK_NUMBER_OR_FLOAT_COERCE_MARKER (val);
+2613	
+2614	      if (FLOATP (val))
+2615		return float_arith_driver (ok_accum, ok_args, code,
+2616					   nargs, args);
+2617	      args[argnum] = val;
+2618	      next = XINT (args[argnum]);
+2619	      switch (code)
+2620		{
+2621		case Aadd:
+2622		  if (INT_ADD_OVERFLOW (accum, next))
+2623		    {
+2624		      overflow = 1;
+2625		      accum &= INTMASK;
+2626		    }
+2627		  accum += next;
+2628		  break;
+2629		case Asub:
+2630		  if (INT_SUBTRACT_OVERFLOW (accum, next))
+2631		    {
+2632		      overflow = 1;
+2633		      accum &= INTMASK;
+2634		    }
+2635		  accum = argnum ? accum - next : nargs == 1 ? - next : next;
+2636		  break;
+2637		case Amult:
+2638		  if (INT_MULTIPLY_OVERFLOW (accum, next))
+2639		    {
+2640		      EMACS_UINT a = accum, b = next, ab = a * b;
+2641		      overflow = 1;
+2642		      accum = ab & INTMASK;
+2643		    }
+2644		  else
+2645		    accum *= next;
+2646		  break;
+2647		case Adiv:
+2648		  if (!argnum)
+2649		    accum = next;
+2650		  else
+2651		    {
+2652		      if (next == 0)
+2653			xsignal0 (Qarith_error);
+2654		      accum /= next;
+2655		    }
+2656		  break;
+2657		case Alogand:
+2658		  accum &= next;
+2659		  break;
+2660		case Alogior:
+2661		  accum |= next;
+2662		  break;
+2663		case Alogxor:
+2664		  accum ^= next;
+2665		  break;
+2666		case Amax:
+2667		  if (!argnum || next > accum)
+2668		    accum = next;
+2669		  break;
+2670		case Amin:
+2671		  if (!argnum || next < accum)
+2672		    accum = next;
+2673		  break;
+2674		}
+2675	    }
+2676	
+2677	  XSETINT (val, accum);
+2678	  return val;
+2679	}

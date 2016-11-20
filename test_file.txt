@@ -1,0 +1,8 @@
+=> 0x542018 <arith_driver+792>:	mov    %rbx,0x10(%rsp)
+
+=> 0x541dab <arith_driver+171>:	jmpq   *0x5e9300(,%rsi,8)
+
+=> 0x541d92 <arith_driver+146>:	cmp    $0x7,%r8d
++si
+0x0000000000541d96	2614	      if (FLOATP (val))
+1: x/i $rip

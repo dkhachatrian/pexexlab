@@ -1,0 +1,26 @@
+# args           -batch -eval '(print (* 6997 -4398042316799 179))'
+
+rax            0xfba340
+rbx            0x7fffffffd8f8
+rcx            0x400000000a000000
+rdx            0x0
+rsi            0x7fffffffd8e0
+rdi            0x3
+rbp            0x7fffffffd9c0
+rsp            0x7fffffffd8d8
+r8             0x2
+r9             0x7fffffffdaa0
+r10            0x0
+r11            0x7ffff1e6c770
+r12            0xaf7950
+r13            0x180
+r14            0x7fffffffd8e0
+r15            0xba84b2
+rip            0x542140
+eflags         0x202
+cs             0x33
+ss             0x2b
+ds             0x0
+es             0x0
+fs             0x0
+gs             0x0
